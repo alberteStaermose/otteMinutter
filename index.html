@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random H2 Placement</title>
+    <link rel="stylesheet" href="main.css" />
+    <style>
+      body {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+      }
+      .random-h2 {
+        position: absolute;
+        font-weight: bold;
+        color: black;
+      }
+
+      article {
+        z-index: 50;
+        background-color: palevioletred;
+        display: grid;
+        /* justify-content: center; */
+        justify-items: center;
+        padding: 50px;
+        /* gap: 1rem; */
+        /* border-radius: 3%; */
+      }
+      form {
+        display: grid;
+        gap: 2rem;
+        justify-items: center;
+      }
+
+      button {
+        background-color: wheat;
+        border-radius: 20rem;
+        border: none;
+        font-size: 3rem;
+        width: 10rem;
+      }
+      button:hover {
+        background-color: black;
+        color: white;
+      }
+
+      input {
+        height: 5rem;
+        width: 60rem;
+        font-size: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <article>
+        <h1>Del dit gode råd</h1>
+        <form id="adviceForm">
+          <label for="fname"></label>
+          <input
+            type="text"
+            id="fname"
+            name="fname"
+            autocomplete="off"
+            required
+          />
+          <button type="submit">Del</button>
+        </form>
+      </article>
+    </main>
+
+    <script>
+      function startAnimationOne(h2Element) {
+        let randomY = Math.random() * (window.innerHeight - 50); // Random start Y position
+        let randomX = Math.random() * (window.innerWidth - 100); // Random start X position
+        let randomSpeed = Math.random() * (10 - 5) + 5; // Random speed between 5s and 10s
+
+        h2Element.style.left = `${randomX}px`;
+        h2Element.style.top = `${randomY}px`;
+        h2Element.style.animation = `moveRight ${randomSpeed}s linear forwards`;
+
+        // When Animation One ends, start Animation Two
+        h2Element.addEventListener("animationend", function () {
+          startAnimationTwo(h2Element);
+        });
+      }
+
+      function startAnimationTwo(h2Element) {
+        function restartAnimation() {
+          let randomY = Math.random() * (window.innerHeight - 50); // New random Y position
+          let randomSpeed = Math.random() * (20 - 10) + 10; // Random speed
+
+          h2Element.style.left = "-100px"; // Start off-screen
+          h2Element.style.top = `${randomY}px`;
+
+          h2Element.style.animation = "none"; // Reset animation
+          void h2Element.offsetWidth; // Force reflow
+          h2Element.style.animation = `moveFromLeft ${randomSpeed}s linear forwards`;
+
+          h2Element.addEventListener("animationend", restartAnimation, {
+            once: true,
+          });
+        }
+
+        restartAnimation(); // Start looping animation
+      }
+
+      // Function to create a new h2 element with a random font size
+      function createNewH2(text) {
+        let newH2 = document.createElement("h2");
+        newH2.classList.add("random-h2");
+        newH2.textContent = text;
+
+        // Set random font size between 14px and 50px
+        let randomFontSize = Math.floor(Math.random() * (80 - 20 + 1)) + 20;
+        newH2.style.fontSize = `${randomFontSize}px`;
+
+        document.body.appendChild(newH2);
+        startAnimationOne(newH2); // Start the first animation
+      }
+
+      // Create initial 20 h2 elements
+      window.onload = function () {
+        for (let i = 0; i < 20; i++) {
+          createNewH2(`Message ${i + 1}`);
+        }
+      };
+
+      // Form submission event
+      document
+        .getElementById("adviceForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent page refresh
+
+          let inputText = document.getElementById("fname").value.trim();
+          if (inputText === "") return; // Ignore empty submissions
+
+          createNewH2(inputText); // Create a new animated h2 with random font size
+          document.getElementById("fname").value = ""; // Clear input field
+        });
+    </script>
+  </body>
+</html>

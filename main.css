@@ -1,0 +1,44 @@
+main {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+body {
+  overflow: hidden;
+  position: relative;
+  height: 100vh;
+}
+
+@keyframes moveRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100vw);
+  }
+}
+
+@keyframes moveFromLeft {
+  0% {
+    transform: translateX(-100px);
+  }
+  100% {
+    transform: translateX(100vw);
+  }
+}
+
+.random-h2 {
+  position: absolute;
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+  white-space: nowrap;
+}
+
+h1 {
+  font-size: 6rem;
+  padding: 0;
+  margin: 0;
+}
