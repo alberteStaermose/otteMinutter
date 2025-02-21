@@ -74,7 +74,7 @@
       function startAnimationOne(h2Element) {
         let randomY = Math.random() * (window.innerHeight - 50); // Random start Y position
         let randomX = Math.random() * (window.innerWidth - 100); // Random start X position
-        let randomSpeed = Math.random() * (10 - 5) + 5; // Random speed between 5s and 10s
+        let randomSpeed = Math.random() * (30 - 10) + 10; // Random speed between 5s and 10s
 
         h2Element.style.left = `${randomX}px`;
         h2Element.style.top = `${randomY}px`;
@@ -89,7 +89,7 @@
       function startAnimationTwo(h2Element) {
         function restartAnimation() {
           let randomY = Math.random() * (window.innerHeight - 50); // New random Y position
-          let randomSpeed = Math.random() * (20 - 10) + 10; // Random speed
+          let randomSpeed = Math.random() * (30 - 10) + 10; // Random speed
 
           h2Element.style.left = "-100px"; // Start off-screen
           h2Element.style.top = `${randomY}px`;
