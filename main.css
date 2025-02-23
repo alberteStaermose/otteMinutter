@@ -10,7 +10,7 @@ body {
   position: relative;
   height: 100vh;
 
-  background-color: #fceaf4;
+  background-color: white;
 }
 
 @keyframes moveRight {
@@ -24,11 +24,24 @@ body {
 
 @keyframes moveFromLeft {
   0% {
-    transform: translateX(-100px);
+    transform: translateX(-500px); /* Start completely off-screen to the left */
+    opacity: 0; /* Start invisible */
+  }
+  10% {
+    transform: translateX(0); /* Enter screen */
+    opacity: 1; /* Fully visible when it enters */
   }
   100% {
-    transform: translateX(100vw);
+    transform: translateX(
+      calc(100vw + 500px)
+    ); /* Move completely off-screen to the right */
+    opacity: 1; /* Stay fully visible */
   }
+}
+
+/* Adjust the animation timing function to ensure consistent speed */
+.random-h2 {
+  animation: moveFromLeft 20s cubic-bezier(0, 0, 1, 1) infinite;
 }
 
 .random-h2 {
@@ -148,4 +161,8 @@ header a:hover {
 
 header a:active {
   text-decoration: underline;
+}
+
+h2 {
+  contentsize: "1160px";
 }

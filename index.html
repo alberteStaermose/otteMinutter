@@ -23,6 +23,15 @@
         gap: 2rem;
         justify-items: center;
       }
+
+      .random-h2 {
+        position: absolute;
+        font-weight: bold;
+        color: black;
+        max-width: 30%; /* Set a max width (in this case, 80% of the parent element) */
+        white-space: normal; /* Allow text to wrap if it exceeds max-width */
+        word-wrap: break-word; /* Break long words if needed */
+      }
     </style>
   </head>
   <body>
@@ -59,36 +68,42 @@
 
     <script>
       function startAnimationOne(h2Element) {
-        let randomY = Math.random() * (window.innerHeight - 50); // Random start Y position
+        let randomY = Math.random() * (window.innerHeight - 100); // Random start Y position
         let randomX = Math.random() * (window.innerWidth - 100); // Random start X position
-        let randomSpeed = Math.random() * (30 - 10) + 10; // Random speed between 10s and 30s
+        let randomSpeed = Math.random() * (40 - 15) + 15; // Random speed between 10s and 30s
 
         h2Element.style.left = `${randomX}px`;
         h2Element.style.top = `${randomY}px`;
         h2Element.style.animation = `moveRight ${randomSpeed}s linear forwards`;
 
         // Start Animation Two a little sooner (e.g., 2 seconds before Animation One ends)
-        setTimeout(() => startAnimationTwo(h2Element), randomSpeed * 1000); // 80% of the first animation duration
+        setTimeout(() => startAnimationTwo(h2Element), randomSpeed * 800); // 80% of the first animation duration
       }
 
       function startAnimationTwo(h2Element) {
         function restartAnimation() {
-          let randomY = Math.random() * (window.innerHeight - 50); // New random Y position
-          let randomSpeed = Math.random() * (30 - 10) + 10; // Random speed
+          let randomY = Math.random() * (window.innerHeight - 300); // Random Y position
+          let randomSpeed = Math.random() * (40 - 15) + 15; // Random speed (between 15s and 40s)
 
-          h2Element.style.left = "-400px"; // Start off-screen
+          // Start off-screen to the left (make sure it doesn't show initially)
+          h2Element.style.left = "-500px"; // Start off-screen to the left
           h2Element.style.top = `${randomY}px`;
+          h2Element.style.opacity = 0; // Start off-screen as invisible
 
-          h2Element.style.animation = "none"; // Reset animation
-          void h2Element.offsetWidth; // Force reflow
+          // Reset animation before restarting it
+          h2Element.style.animation = "none";
+          void h2Element.offsetWidth; // Force reflow to reset animation
+
+          // Start animation with the element becoming visible as it moves
           h2Element.style.animation = `moveFromLeft ${randomSpeed}s linear forwards`;
 
+          // Restart the animation once it finishes
           h2Element.addEventListener("animationend", restartAnimation, {
             once: true,
           });
         }
 
-        restartAnimation(); // Start looping animation
+        restartAnimation(); // Start the animation
       }
 
       // Function to create a new h2 element with a random font size
@@ -108,26 +123,22 @@
       // Create initial 20 h2 elements
       // List of predefined messages
       const messages = [
-        "Stay strong!",
-        "Believe in yourself!",
-        "You are amazing!",
-        "Keep pushing forward!",
-        "Stay positive!",
-        "Never give up!",
-        "You got this!",
-        "One step at a time!",
-        "Dream big!",
-        "Make today great!",
-        "Stay strong!",
-        "Believe in yourself!",
-        "You are amazing!",
-        "Keep pushing forward!",
-        "Stay positive!",
-        "Never give up!",
-        "You got this!",
-        "One step at a time!",
-        "Dream big!",
-        "Make today great!",
+        "Opret en fb gruppe og brug den som dagbog",
+        "Gøre det tydeligt overfor pårørende om man ønsker at snakke fremfor stilhed",
+        "Spørge 'hvordan har du det?'",
+        "Lade den syge tale",
+        "Sige at man er for at lytte",
+        "Lyt fremfor at snakke",
+        "Giv et kram, hvis man synes det er svært at snakke om",
+        "Tag snakken, selvom man bliver ked af det. Det er rart at tage de svære snakke sammen.",
+        "Send et hjerte <3",
+        "Spørg, selvom spørgsmålene kan være svære at svare på",
+        "Det er  rarere at blive spurgt, end at gå med følelesen af at der snakkes i krogene",
+        "Fortælle at man ikke ved hvad man skal sige",
+        "Giv et kram! Gerne et langt et",
+        "Lad være med at nævne 'jeg kender...' osv",
+        "Lad være med at sammenligne den syge med andre syge man kender",
+        "Spørg kun ind, hvis man er klar til sårbare og ærlige svar",
       ];
 
       // Define 4 colors to choose from
@@ -147,7 +158,7 @@
         newH2.textContent = text;
 
         // Set random font size between 20px and 80px
-        let randomFontSize = Math.floor(Math.random() * (80 - 20 + 1)) + 20;
+        let randomFontSize = Math.floor(Math.random() * (60 - 16 + 1)) + 16;
         newH2.style.fontSize = `${randomFontSize}px`;
 
         // Assign a random color from the predefined list
