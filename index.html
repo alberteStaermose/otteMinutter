@@ -20,7 +20,7 @@
 
       form {
         display: grid;
-        gap: 2rem;
+
         justify-items: center;
       }
 
@@ -46,12 +46,6 @@
       <article>
         <h1>Del dit råd</h1>
 
-        <p>
-          Det kan være svært at starte en svær samtale. Del dit gode råd til
-          hvad man skal sige til en syg, så svære samtaler bliver nemmere og du
-          ikke skal gå og føle du er en byrde. Der skal ikke mere end 8 minutter
-          til.
-        </p>
         <form id="adviceForm">
           <label for="fname"></label>
           <input
@@ -67,6 +61,8 @@
     </main>
 
     <script>
+      let currentId = 1; // Track the current ID for the <h2> elements
+
       function startAnimationOne(h2Element) {
         let randomY = Math.random() * (window.innerHeight - 100); // Random start Y position
         let randomX = Math.random() * (window.innerWidth - 100); // Random start X position
@@ -111,6 +107,7 @@
         let newH2 = document.createElement("h2");
         newH2.classList.add("random-h2");
         newH2.textContent = text;
+        newH2.id = `h2${currentId}`; // Assign a unique ID to each h2
 
         // Set random font size between 14px and 50px
         let randomFontSize = Math.floor(Math.random() * (80 - 20 + 1)) + 20;
@@ -118,27 +115,29 @@
 
         document.body.appendChild(newH2);
         startAnimationOne(newH2); // Start the first animation
+
+        currentId++; // Increment the ID for the next <h2>
       }
 
       // Create initial 20 h2 elements
       // List of predefined messages
       const messages = [
-        "Opret en fb gruppe og brug den som dagbog",
-        "Gøre det tydeligt overfor pårørende om man ønsker at snakke fremfor stilhed",
-        "Spørge 'hvordan har du det?'",
-        "Lade den syge tale",
-        "Sige at man er for at lytte",
-        "Lyt fremfor at snakke",
-        "Giv et kram, hvis man synes det er svært at snakke om",
-        "Tag snakken, selvom man bliver ked af det. Det er rart at tage de svære snakke sammen.",
-        "Send et hjerte <3",
-        "Spørg, selvom spørgsmålene kan være svære at svare på",
-        "Det er  rarere at blive spurgt, end at gå med følelesen af at der snakkes i krogene",
-        "Fortælle at man ikke ved hvad man skal sige",
-        "Giv et kram! Gerne et langt et",
-        "Lad være med at nævne 'jeg kender...' osv",
-        "Lad være med at sammenligne den syge med andre syge man kender",
-        "Spørg kun ind, hvis man er klar til sårbare og ærlige svar",
+        "'Opret en fb gruppe og brug den som dagbog'",
+        "'Gøre det tydeligt overfor pårørende om man ønsker at snakke fremfor stilhed'",
+        "'Spørge 'hvordan har du det?'",
+        "'Lade den syge tale'",
+        "'Sige at man er for at lytte'",
+        "'Lyt fremfor at snakke'",
+        "'Giv et kram, hvis man synes det er svært at snakke om'",
+        "'Tag snakken, selvom man bliver ked af det. Det er rart at tage de svære snakke sammen'",
+        "'Send et hjerte <3'",
+        "'Spørg, selvom spørgsmålene kan være svære at svare på'",
+        "'Det er  rarere at blive spurgt, end at gå med følelsen af at der snakkes i krogene'",
+        "'Fortælle at man ikke ved hvad man skal sige'",
+        "'Giv et kram! Gerne et langt et'",
+        "'Lad være med at nævne 'jeg kender...' osv'",
+        "'Lad være med at sammenligne den syge med andre syge man kender'",
+        "'Spørg kun ind, hvis man er klar til sårbare og ærlige svar'",
       ];
 
       // Define 4 colors to choose from
@@ -156,6 +155,7 @@
         let newH2 = document.createElement("h2");
         newH2.classList.add("random-h2");
         newH2.textContent = text;
+        newH2.id = `h2${currentId}`; // Assign a unique ID to each h2
 
         // Set random font size between 20px and 80px
         let randomFontSize = Math.floor(Math.random() * (60 - 16 + 1)) + 16;
@@ -167,6 +167,8 @@
 
         document.body.appendChild(newH2);
         startAnimationOne(newH2); // Start animation
+
+        currentId++; // Increment the ID for the next <h2>
       }
 
       // Display all predefined messages on page load

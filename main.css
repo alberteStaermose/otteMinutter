@@ -51,8 +51,11 @@ body {
   color: black;
   white-space: nowrap;
   font-family: "verdana-pro", sans-serif;
-  font-weight: 400;
+
   font-style: normal;
+
+  font-weight: 300;
+  font-style: italic;
 }
 
 h1 {
@@ -103,12 +106,9 @@ button:hover {
 }
 
 input {
-  height: 5rem;
+  height: 60px;
+  min-width: 600px;
   width: 100%;
-  font-size: 40px;
-}
-
-input {
   border-radius: 0.8rem;
   border: none;
   font-size: 2rem;
@@ -117,9 +117,12 @@ input {
   font-family: "verdana-pro", sans-serif;
   font-weight: 400;
   font-style: normal;
+  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
 article {
+  gap: 1px;
   max-width: 800px;
   width: fit-content;
   z-index: 50;
@@ -128,7 +131,11 @@ article {
   display: grid;
   /* justify-content: center; */
   justify-items: center;
-  padding: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+
   /* gap: 1rem; */
   /* border-radius: 3%; */
   border-radius: 25px;
@@ -161,8 +168,4 @@ header a:hover {
 
 header a:active {
   text-decoration: underline;
-}
-
-h2 {
-  contentsize: "1160px";
 }
