@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Random H2 Placement</title>
+    <title>Støt Brysterne</title>
     <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="https://use.typekit.net/cxw6omf.css" />
     <style>
       body {
         position: relative;
@@ -17,45 +18,31 @@
         color: black;
       }
 
-      article {
-        z-index: 50;
-        background-color: palevioletred;
-        display: grid;
-        /* justify-content: center; */
-        justify-items: center;
-        padding: 50px;
-        /* gap: 1rem; */
-        /* border-radius: 3%; */
-      }
       form {
         display: grid;
         gap: 2rem;
         justify-items: center;
       }
-
-      button {
-        background-color: wheat;
-        border-radius: 20rem;
-        border: none;
-        font-size: 3rem;
-        width: 10rem;
-      }
-      button:hover {
-        background-color: black;
-        color: white;
-      }
-
-      input {
-        height: 5rem;
-        width: 60rem;
-        font-size: 40px;
-      }
     </style>
   </head>
   <body>
+    <header>
+      <a href="/index.html">Jeres råd</a>
+
+      <a href="">Ekspertråd</a>
+      <a href="">Har du 8 minutter</a>
+      <a href="">Støt</a>
+    </header>
     <main>
       <article>
-        <h1>Del dit gode råd</h1>
+        <h1>Del dit råd</h1>
+
+        <p>
+          Det kan være svært at starte en svær samtale. Del dit gode råd til
+          hvad man skal sige til en syg, så svære samtaler bliver nemmere og du
+          ikke skal gå og føle du er en byrde. Der skal ikke mere end 8 minutter
+          til.
+        </p>
         <form id="adviceForm">
           <label for="fname"></label>
           <input
@@ -74,16 +61,14 @@
       function startAnimationOne(h2Element) {
         let randomY = Math.random() * (window.innerHeight - 50); // Random start Y position
         let randomX = Math.random() * (window.innerWidth - 100); // Random start X position
-        let randomSpeed = Math.random() * (30 - 10) + 10; // Random speed between 5s and 10s
+        let randomSpeed = Math.random() * (30 - 10) + 10; // Random speed between 10s and 30s
 
         h2Element.style.left = `${randomX}px`;
         h2Element.style.top = `${randomY}px`;
         h2Element.style.animation = `moveRight ${randomSpeed}s linear forwards`;
 
-        // When Animation One ends, start Animation Two
-        h2Element.addEventListener("animationend", function () {
-          startAnimationTwo(h2Element);
-        });
+        // Start Animation Two a little sooner (e.g., 2 seconds before Animation One ends)
+        setTimeout(() => startAnimationTwo(h2Element), randomSpeed * 1000); // 80% of the first animation duration
       }
 
       function startAnimationTwo(h2Element) {
@@ -91,7 +76,7 @@
           let randomY = Math.random() * (window.innerHeight - 50); // New random Y position
           let randomSpeed = Math.random() * (30 - 10) + 10; // Random speed
 
-          h2Element.style.left = "-100px"; // Start off-screen
+          h2Element.style.left = "-400px"; // Start off-screen
           h2Element.style.top = `${randomY}px`;
 
           h2Element.style.animation = "none"; // Reset animation
@@ -121,10 +106,61 @@
       }
 
       // Create initial 20 h2 elements
+      // List of predefined messages
+      const messages = [
+        "Stay strong!",
+        "Believe in yourself!",
+        "You are amazing!",
+        "Keep pushing forward!",
+        "Stay positive!",
+        "Never give up!",
+        "You got this!",
+        "One step at a time!",
+        "Dream big!",
+        "Make today great!",
+        "Stay strong!",
+        "Believe in yourself!",
+        "You are amazing!",
+        "Keep pushing forward!",
+        "Stay positive!",
+        "Never give up!",
+        "You got this!",
+        "One step at a time!",
+        "Dream big!",
+        "Make today great!",
+      ];
+
+      // Define 4 colors to choose from
+      const colors = [
+        "#ff0091",
+        "#3d3d3d",
+        "#f5bed9",
+        "#fadbeb",
+        "#8a8a8a",
+        "#FF9be1",
+      ]; // Example colors
+
+      // Function to create and animate each message
+      function createNewH2(text) {
+        let newH2 = document.createElement("h2");
+        newH2.classList.add("random-h2");
+        newH2.textContent = text;
+
+        // Set random font size between 20px and 80px
+        let randomFontSize = Math.floor(Math.random() * (80 - 20 + 1)) + 20;
+        newH2.style.fontSize = `${randomFontSize}px`;
+
+        // Assign a random color from the predefined list
+        let randomColor = colors[Math.floor(Math.random() * colors.length)];
+        newH2.style.color = randomColor;
+
+        document.body.appendChild(newH2);
+        startAnimationOne(newH2); // Start animation
+      }
+
+      // Display all predefined messages on page load
       window.onload = function () {
-        for (let i = 0; i < 20; i++) {
-          createNewH2(`Message ${i + 1}`);
-        }
+        messages.forEach((message) => createNewH2(message));
       };
 
       // Form submission event
